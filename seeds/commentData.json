@@ -1,0 +1,38 @@
+[
+    {
+        "comment": "This is a crazy example comment! Foo Lala",
+        "date_created": "January 25, 2023",
+        "user_id": 1,
+        "post_id": 2
+      },
+      {
+        "comment": "This is a crazy example comment! Foo Lala",
+        "date_created": "April 23, 2023",
+        "user_id": 1,
+        "post_id": 3
+      },
+      {
+        "comment": "This is a crazy example comment! Foo Lala",
+        "date_created": "March 14, 2023",
+        "user_id": 2,
+        "post_id": 1
+      },
+      {
+        "comment": "This is a crazy example comment! Foo Lala",
+        "date_created": "August 11, 2023",
+        "user_id": 2,
+        "post_id": 3
+      },
+      {
+        "comment": "This is a crazy example comment! Foo Lala",
+        "date_created": "January 19, 2023",
+        "user_id": 3,
+        "post_id": 1
+      },
+      {
+        "comment": "This is a crazy example comment! Foo Lala",
+        "date_created": "September 12, 2023",
+        "user_id": 3,
+        "post_id": 2
+      }
+]
