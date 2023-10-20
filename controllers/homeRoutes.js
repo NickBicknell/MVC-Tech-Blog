@@ -83,24 +83,7 @@ router.get('/dashboard', withAuth, async (req, res) => {
   }
 });
 
-router.get("/create", async (req, res) => {
-  try {
-    if (req.session.logged_in) {
-      res.render("create", {
-        logged_in: req.session.logged_in,
-        userId: req.session.user_id,
-      });
-      return;
-    } else {
-      res.redirect("/login");
-    }
-  } catch (err) {
-    console.log(err);
-    res.status(500).json(err);
-  }
-});
-
-router.get("/create/:id", async (req, res) => {
+router.get("/edit/:id", async (req, res) => {
   try {
     const postData = await Post.findByPk(req.params.id, {
       include: [

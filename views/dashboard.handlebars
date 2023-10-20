@@ -1,48 +1,123 @@
-<div class="row">
-  <div class="col-auto">
-    <h2>Welcome, {{name}}!</h2>
+<div class="row mt-4">
+  <div class="col-12 col-md-4 d-flex flex-column align-items-center p-4 mb-5">
+    <button
+      class='text-warning button btn btn-lg btn-dark mb-4 shadow-lg rounded'
+      data-bs-toggle='modal'
+      data-bs-target='#newPostModal'
+      id='new-post-btn'
+    >+ New Post</button>
+  </div>
+  {{!-- modal --}}
+  <div
+  class='modal fade'
+  id='newPostModal'
+  tabindex='-1'
+  aria-labelledby='exampleModalLabel'
+  aria-hidden='true'
+>
+  <div class='modal-dialog'>
+    <div class='modal-content bg-dark text-white'>
+      <div class='modal-header'>
+        <h5 class='modal-title fs-3'>New Post</h5>
+        <button
+          type='button'
+          class='btn-close'
+          data-bs-dismiss='modal'
+          aria-label='Close'
+        ></button>
+      </div>
+      <div class='modal-body'>
+        <form class='form new-post-form'>
+          <div class='form-group col-12 mb-2'>
+            <label class="fs-5">Post Title</label>
+            <input type='text' class='form-control' id='post-title' />
+          </div>
+          <div class='form-group col-12 mb-2'>
+            <label class="fs-5">Post Content</label>
+            <textarea class="form-control rounded" id="post-content" rows="10"></textarea>
+          </div>
+          <button
+            type='submit'
+            data-bs-dismiss='modal'
+            class='btn btn-light'
+          >Submit</button>
+        </form>
+      </div>
+    </div>
   </div>
 </div>
 
-<div class="row mt-4">
-  <div class="col-md-6">
-    <h3>Create a New Project:</h3>
+  <div class="col-12 col-md-8 d-flex bg-dark flex-column rounded justify-content-center shadow-lg p-4">
+    <h3 class="text-white align-self-center mb-2">Your Posts</h3>
+  {{#if posts.length}}
 
-    <form class="form new-project-form">
-      <div class="form-group">
-        <label for="project-name">project name:</label>
-        <input class="form-input" type="text" id="project-name" name="project-name" />
-      </div>
-      <div class="form-group">
-        <label for="project-funding">needed funding ($):</label>
-        <input class="form-input" type="number" id="project-funding" name="project-funding" />
-      </div>
-      <div class="form-group">
-        <label for="project-desc">description:</label>
-        <textarea class="form-input" id="project-desc" name="project-desc"></textarea>
-      </div>
-      <div class="form-group">
-        <button type="submit" class="btn btn-primary">Create</button>
-      </div>
-    </form>
-  </div>
-
-  {{#if projects.length}}
-  <div class="col-md-6 project-list">
-    <h3>Current Projects:</h3>
-
-    {{#each projects as |project|}}
-    <div class="row mb-2">
-      <div class="col-md-8">
-        <h4><a href="/project/{{project.id}}">{{project.name}}</a></h4>
-      </div>
-      <div class="col-md-4">
-        <button class="btn btn-sm btn-danger" data-id="{{project.id}}">DELETE</button>
+    {{#each posts as |post|}}
+    <div class="container">
+  <div class="row">
+    <div class="card text-white bg-secondary shadow mb-3">
+      <div class="text-center mx-auto p-3">
+        <h2><a class="text-white" href="/post/{{id}}">{{title}}</a></h2>
+        <p class="text-warning">Created by {{user.name}} on {{format_date date_created}}</p>
+        <button
+          data-bs-toggle='modal'
+          data-bs-target='#editPostModal{{id}}'
+          class="btn btn-dark"
+          id="edit-btn"
+          data-id="{{id}}"
+        >Edit</button>
+        <button
+          class="btn btn-dark"
+          id="delete-btn"
+          data-id="{{id}}"
+        >Delete</button>
       </div>
     </div>
-    {{/each}}
   </div>
+</div>
+<div
+  class='modal fade'
+  id='editPostModal{{id}}'
+  tabindex='-1'
+  aria-labelledby='exampleModalLabel'
+  aria-hidden='true'
+>
+  <div class='modal-dialog'>
+    <div class='modal-content bg-dark text-white'>
+      <div class='modal-header'>
+        <h5 class='modal-title fs-3'>{{title}}</h5>
+        <button
+          type='button'
+          class='btn-close'
+          data-bs-dismiss='modal'
+          aria-label='Close'
+        ></button>
+      </div>
+      <div class='modal-body'>
+        <form class='form edit-post-form'>
+          <div class='form-group col-12 mb-2'>
+            <label class="fs-5">Edit Post Title:</label>
+            <input type='text' class='form-control' id='edit-post-title' placeholder="{{title}}" />
+          </div>
+          <div class='form-group col-12 mb-2'>
+            <label class="fs-5">Edit Post Content:</label>
+            <textarea class="form-control rounded" id="edit-post-content" rows="10">{{content}}</textarea>
+          </div>
+          <button
+            type='submit'
+            data-bs-dismiss='modal'
+            class='btn btn-light'
+          >Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+    {{/each}}
+
   {{/if}}
 </div>
 
-<script src="./js/profile.js"></script>
+<script src="./js/post.js"></script>
+
+

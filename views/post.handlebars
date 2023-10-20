@@ -1,0 +1,71 @@
+<div class="container">
+  <div class="row">
+    <div class="card text-white bg-dark shadow mb-3">
+      <div class="text-center mx-auto p-3">
+        <h2>{{title}}</h2>
+        <p class="text-warning">Created by {{user.name}} on {{format_date date_created}}</p>
+        <p class="text-white">{{content}}</p>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="card bg-dark text-white shadow">
+      <div class="card-header">Comments</div>
+      {{#if logged_in}}
+        <div>
+          <button
+            class="text-warning button btn btn-lg btn-secondary my-4 shadow-lg rounded"
+            data-bs-toggle="modal"
+            data-bs-target="#newCommentModal"
+            id="new-comment-btn"
+          >+ New Comment</button>
+        </div>
+
+        <div
+          class="modal fade"
+          id="newCommentModal"
+          tabindex="-1"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog">
+            <div class="modal-content bg-dark text-white">
+              <div class="modal-header">
+                <h5 class="modal-title fs-3">New Comment</h5>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <form class='form new-comment-form'>
+                  <div class="form-group col-12 mb-2">
+                    <textarea
+                      class="form-control rounded"
+                      id="comment"
+                      rows="10"
+                    ></textarea>
+                  </div>
+                  <button
+                    type="submit"
+                    data-bs-dismiss="modal"
+                    class="btn btn-light"
+                  >Submit</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      {{/if}}
+      {{#each comments as |comment|}}
+        <p>{{user.name}}</p>
+        <p>{{format_date date_created}}</p>
+        <p>{{comment}}</p>
+      {{/each}}
+    </div>
+  </div>
+</div>
+
+<script src="./js/post.js"></script>
