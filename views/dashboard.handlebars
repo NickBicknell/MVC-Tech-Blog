@@ -102,6 +102,7 @@
             <label class="fs-5">Edit Post Content:</label>
             <textarea class="form-control rounded" id="edit-post-content" rows="10">{{content}}</textarea>
           </div>
+          <input type='hidden' id='post_id' value='{{id}}' />
           <button
             type='submit'
             data-bs-dismiss='modal'
@@ -118,6 +119,6 @@
   {{/if}}
 </div>
 
-<script src="./js/post.js"></script>
+<script src="./js/posts.js"></script>
 
 

@@ -48,12 +48,14 @@ document
   .querySelector("#delete-btn")
   ?.addEventListener("click", delPostHandler);
 
-const editPostHandler = async (event) => {
+const editPostHandler = async () => {
+
+  console.log('test');
   const title = document.querySelector("#edit-post-title").value.trim();
   const content = document.querySelector("#edit-post-content").value.trim();
-  if (event.target.hasAttribute("data-id")) {
-    const id = event.target.getAttribute("data-id");
-
+  const id = document.querySelector("#post_id").value;
+  console.log(id);
+  if (id) {
     const response = await fetch(`/api/posts/${id}`, {
       method: "PUT",
       body: JSON.stringify({
@@ -76,31 +78,29 @@ const editPostHandler = async (event) => {
 };
 
 document
-  .querySelector(`.edit-post-form`)
+  .querySelector('.edit-post-form')
   ?.addEventListener("submit", editPostHandler);
 
-async function newCommentHandler(event) {
+const newCommentHandler = async (event) => {
   event.preventDefault();
+  console.log("test");
+  const comment = document.querySelector("#comment").value;
+  const id = document.querySelector("#post_id").value;
 
-  const comment = document.querySelector("#comment").value.trim();
-
-  const url = window.location.toString().split("/");
-  const id = url[url.length - 1];
+  console.log(comment);
+  console.log(id);
 
   if (comment) {
     const response = await fetch("/api/comments", {
       method: "POST",
       body: JSON.stringify({
-        id,
+        post_id: id,
         comment,
       }),
       headers: {
         "Content-Type": "application/json",
       },
     });
-    
-    const returnData = await response.json();
-    console.log(returnData);
 
     if (response.ok) {
       document.location.reload();
@@ -108,8 +108,18 @@ async function newCommentHandler(event) {
       alert(response.statusText);
     }
   }
-}
+};
 
 document
-  .getElementById("new-comment-form")
+  .querySelector(".new-comment-form")
   ?.addEventListener("submit", newCommentHandler);
+
+// window.onload = fetch(`/api/posts/${post_id}`, {
+//   method: "GET",
+//   })
+//   .then(function (response) {
+//     return response.json();
+//   })
+//   .catch(function (err) {
+//     console.error(err);
+//   });

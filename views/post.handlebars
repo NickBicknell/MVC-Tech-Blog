@@ -3,22 +3,28 @@
     <div class="card text-white bg-dark shadow mb-3">
       <div class="text-center mx-auto p-3">
         <h2>{{title}}</h2>
-        <p class="text-warning">Created by {{user.name}} on {{format_date date_created}}</p>
+        <p class="text-warning">Created by
+          {{user.name}}
+          on
+          {{format_date date_created}}</p>
         <p class="text-white">{{content}}</p>
       </div>
     </div>
   </div>
-  <div class="row">
-    <div class="card bg-dark text-white shadow">
+
+<div class="col-8 text-center mx-auto">
+  <div class="card bg-dark text-white shadow">
+    <div class="row">
       <div class="card-header">Comments</div>
       {{#if logged_in}}
-        <div>
+        <div class="col-12">
           <button
             class="text-warning button btn btn-lg btn-secondary my-4 shadow-lg rounded"
             data-bs-toggle="modal"
             data-bs-target="#newCommentModal"
             id="new-comment-btn"
           >+ New Comment</button>
+        </div>
         </div>
 
         <div
@@ -40,7 +46,7 @@
                 ></button>
               </div>
               <div class="modal-body">
-                <form class='form new-comment-form'>
+                <form class="form new-comment-form">
                   <div class="form-group col-12 mb-2">
                     <textarea
                       class="form-control rounded"
@@ -48,6 +54,7 @@
                       rows="10"
                     ></textarea>
                   </div>
+                  <input type="hidden" id="post_id" value="{{id}}" />
                   <button
                     type="submit"
                     data-bs-dismiss="modal"
@@ -58,14 +65,25 @@
             </div>
           </div>
         </div>
+
+      {{else}}
+        <p class="text-warning">Login to leave comments!</p>
       {{/if}}
+
+      <div class="row">
       {{#each comments as |comment|}}
-        <p>{{user.name}}</p>
-        <p>{{format_date date_created}}</p>
-        <p>{{comment}}</p>
+      
+        <div class="col-4 text-center">
+          <div class="card bg-secondary text-white shadow">
+            <p class="text-warning">{{user.name}}</p>
+            <p class="text-warning">{{format_date date_created}}</p>
+            <p>{{comment.comment}}</p>
+          </div>
+        </div>
       {{/each}}
     </div>
   </div>
+  </div>
 </div>
 
-<script src="./js/post.js"></script>
+<script src="/js/posts.js" type="text/javascript"></script>
