@@ -2,6 +2,9 @@ const router = require("express").Router();
 const { Post, Comment, User } = require("../../models");
 const withAuth = require("../../utils/auth");
 
+// The `/api/comments` endpoint
+
+// GET all comments from comment table
 router.get("/", async (req, res) => {
     try {
       const commentData = await Comment.findAll({
@@ -22,6 +25,7 @@ router.get("/", async (req, res) => {
     }
 });
 
+// POST a new comment to commment table
 router.post("/", async (req, res) => {
   try {
     const commentData = await Comment.create({
@@ -37,6 +41,7 @@ router.post("/", async (req, res) => {
   }
 });
 
+// PUT/update a specific comment
 router.put("/:id", async (req, res) => {
     try {
       const commentData = await Comment.update(req.body, {
@@ -58,6 +63,7 @@ router.put("/:id", async (req, res) => {
     }
 });
 
+// DELETE a comment from comment table
 router.delete("/:id", async (req, res) => {
     try {
       const commentData = await Comment.destroy({

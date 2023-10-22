@@ -1,3 +1,4 @@
+// takes user input from new post modal, makes a POST request to /api/posts creating a new post 
 const newPostHandler = async (event) => {
   event.preventDefault();
 
@@ -28,6 +29,7 @@ document
   .querySelector(".new-post-form")
   ?.addEventListener("submit", newPostHandler);
 
+// DELETE a post that matches data-id of post interacted with
 const delPostHandler = async (event) => {
   if (event.target.hasAttribute("data-id")) {
     const id = event.target.getAttribute("data-id");
@@ -48,9 +50,8 @@ document
   .querySelector("#delete-btn")
   ?.addEventListener("click", delPostHandler);
 
+// edit an existing post, make a PUT request and update existing post with new inputed data
 const editPostHandler = async () => {
-
-  console.log('test');
   const title = document.querySelector("#edit-post-title").value.trim();
   const content = document.querySelector("#edit-post-content").value.trim();
   const id = document.querySelector("#post_id").value;
@@ -81,6 +82,7 @@ document
   .querySelector('.edit-post-form')
   ?.addEventListener("submit", editPostHandler);
 
+// creates a new comment with user input in comment modal, makes POST request to /api/comments/ 
 const newCommentHandler = async (event) => {
   event.preventDefault();
   console.log("test");
@@ -114,12 +116,3 @@ document
   .querySelector(".new-comment-form")
   ?.addEventListener("submit", newCommentHandler);
 
-// window.onload = fetch(`/api/posts/${post_id}`, {
-//   method: "GET",
-//   })
-//   .then(function (response) {
-//     return response.json();
-//   })
-//   .catch(function (err) {
-//     console.error(err);
-//   });

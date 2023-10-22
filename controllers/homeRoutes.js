@@ -2,6 +2,7 @@ const router = require('express').Router();
 const { Post, Comment, User } = require('../models');
 const withAuth = require('../utils/auth');
 
+// GET all posts from Post table, renders homepage.handlebar
 router.get('/', async (req, res) => {
   try {
     const postData = await Post.findAll({
@@ -29,6 +30,7 @@ router.get('/', async (req, res) => {
   }
 });
 
+// GET single post from Post table, render post.handlebar
 router.get('/post/:id', async (req, res) => {
   try {
     const postData = await Post.findByPk(req.params.id, {
@@ -56,6 +58,7 @@ router.get('/post/:id', async (req, res) => {
   }
 });
 
+// check if user is logged in, if yes render dashboard.handlebar
 router.get('/dashboard', withAuth, async (req, res) => {
   try {
     const userData = await User.findByPk(req.session.user_id, {
@@ -83,6 +86,7 @@ router.get('/dashboard', withAuth, async (req, res) => {
   }
 });
 
+// render login.handlebar, check if already logged in, if so render dashboard instead
 router.get('/login', (req, res) => {
   if (req.session.logged_in) {
     res.redirect('/dashboard');

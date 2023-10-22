@@ -27,6 +27,7 @@
         </div>
         </div>
 
+        {{!-- modal --}}
         <div
           class="modal fade"
           id="newCommentModal"
@@ -73,7 +74,7 @@
       <div class="row">
       {{#each comments as |comment|}}
       
-        <div class="col-4 text-center">
+        <div class="col-4 text-center mx-auto my-2">
           <div class="card bg-secondary text-white shadow">
             <p class="text-warning">{{user.name}}</p>
             <p class="text-warning">{{format_date date_created}}</p>

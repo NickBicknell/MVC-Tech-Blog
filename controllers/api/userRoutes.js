@@ -1,6 +1,9 @@
 const router = require('express').Router();
 const { User } = require('../../models');
 
+// The `/api/users` endpoint
+
+// POST a new user to User table
 router.post('/', async (req, res) => {
   try {
     const userData = await User.create(req.body);
@@ -16,6 +19,7 @@ router.post('/', async (req, res) => {
   }
 });
 
+// POST request new login, validates login information
 router.post('/login', async (req, res) => {
   try {
     const userData = await User.findOne({ where: { email: req.body.email } });
@@ -48,6 +52,7 @@ router.post('/login', async (req, res) => {
   }
 });
 
+// POST a new logout request, destroying current session
 router.post('/logout', (req, res) => {
   if (req.session.logged_in) {
     req.session.destroy(() => {
